@@ -390,6 +390,7 @@ fn main() {
 
         (window, size, surface)
     };
+    dbg!(&size);
 
     let hidpi_factor = window.scale_factor();
 
