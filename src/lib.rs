@@ -539,7 +539,7 @@ impl Renderer {
         // Make sure the current buffers are attached to the render pass.
         rpass.set_index_buffer(index_buffer.slice(..), IndexFormat::Uint16);
         rpass.set_vertex_buffer(0, vertex_buffer.slice(..));
-
+        dbg!(&clip_off, &clip_scale);
         for cmd in draw_list.commands() {
             if let Elements { count, cmd_params } = cmd {
                 let clip_rect = [
@@ -564,6 +564,7 @@ impl Renderer {
                     (clip_rect[2] - clip_rect[0]).abs().ceil() as u32,
                     (clip_rect[3] - clip_rect[1]).abs().ceil() as u32,
                 );
+                dbg!(&scissors);
                 rpass.set_scissor_rect(scissors.0, scissors.1, scissors.2, scissors.3);
 
                 // Draw the current batch of vertices with the renderpass.
